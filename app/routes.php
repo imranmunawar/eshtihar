@@ -57,4 +57,8 @@ Route::group(array('before' => 'guest'), function() {
 	Route::get('/get-four-level/{id}', function($id) {
 				return GeneralPurpose::getFourLevel($id);
 	});	
+	Route::get('/poster/attributes/{id}', array(
+			   'as' => 'attribes',
+		       'uses' => 'PosterController@getAttributes'
+	 ));		
 });

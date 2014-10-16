@@ -180,4 +180,11 @@ h2.shop-box-title {
 #load-attributes {
 	display:none;
 }
+.container-fluid {
+    position: relative;
+    top: -20px;
+}
+.karamaShop {
+    background: none repeat scroll 0 0 #fff;
+}
 /*2386c8*/

@@ -138,6 +138,14 @@ class PosterController extends BaseController {
 			return Redirect::route('createad')->with('global', 'Eshtihar successfully added');			
 		}
 	}
+	public function getAttributes($id)
+	{
+		$catFields  = CategoryField::where('category_id', '=', $id)->orderBy('field_label')->get(array('id', 'field_label', 'field_type', 'field_value'));
+		$view = View::make('poster.attribes')->with('title' , 'Post a free ad');
+		$view->fields = $catFields;
+		return $view;
+
+	}	
 	public function getList(){
 		$view = View::make('poster.list')->with('title' , 'Post a free ad');
 	}	

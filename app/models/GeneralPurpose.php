@@ -45,19 +45,16 @@ class GeneralPurpose {
 	}
 	public static function getThirdLevel($id){
         $categories = Category::where('parent_id', '=', $id)->orderBy('category')->get(array('id', 'category', 'parent_id'));
-		$catFields  = CategoryField::where('category_id', '=', $id)->orderBy('field_label')->get(array('id', 'field_label', 'field_type', 'field_value'));
 		//print_r($categories->first()->parent_id);
         if (!is_null($categories->first())) {
             return Response::json(array(
                         'status' => 'success',
                         'categories' => $categories,
-						'fields'     => $catFields,
                     ));
         } else {
             return Response::json(array(
                         'status' => 'fail',
-                        'categories' => '',
-						'fields'     => '',						
+                        'categories' => '',					
                     ));
         }		
 	}

@@ -1,4 +1,8 @@
-﻿<div class="navbar navbar-default navbar-static-top" role="navigation">
+﻿<?php
+$url = 'http://api.hostip.info/?ip='.$_SERVER['REMOTE_ADDR'];
+echo $url;
+?>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -9,7 +13,7 @@
       </button>
       <a class="navbar-brand" href="{{ URL::to('/'); }}">
         <img src="{{ URL::to('/'); }}/img/logo.png">
-        <span><strong>eshtihar</strong>.com</span>
+        <span><strong>eshtihar</strong><!--.com--></span>
         <p>Pakistan's first growing online classified</p>
       </a>
     </div>

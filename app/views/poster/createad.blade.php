@@ -48,7 +48,7 @@
               </div>
               
               
-			  <div class="signup-form">
+<!--			  <div class="signup-form">
                 <h2 class="content-heading">Ad Detail</h2>
                  
 				 <div class="form-section">
@@ -62,7 +62,7 @@
 
                                     
                   <div class="cb"></div>
-              </div>              
+              </div>-->              
               
               
 			  <div class="signup-form">

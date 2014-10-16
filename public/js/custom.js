@@ -59,35 +59,21 @@ function loadSecondLevel(id){
 		}
 	});
 }
-function loadAttribute(fields){
-	field_html = '';
-	$.each(fields, function(k, v)
-	{
-		field = makeTag(v.field_type, v.field_value, v.id);
-		field_html += '<div class="form-section">';
-		field_html += '<label class="control-label form-section-left">'+v.field_label+'<span class="impred">*</span></label>';
-		field_html += '<div class="form-section-right">'+field+'</div>';
-		field_html += '<div class="form-section-third"></div></div>';				
-	});	
-	$('#load-attributes').show();
-	$('#load-attributes').html(field_html);
-}
-function makeTag(type, value, id){
-	tag = '';
-	if(type == 'text'){
-		tag = '<input type="text" name="attribute'+id+'" />';			
-	}
-	else if(type == 'list'){
-		tag += '<select name="attribute'+id+'" />';
-		var value = JSON.parse( value );
-		alert(value);
-		$.each(value, function(k, v)
-		{
-			tag += '<option value="'+value.val+'">'+value.val+'<option>';
-		});
-		tag += '</select>';		
-	}	
-	return tag;
+function loadAttribute(id){
+	$.ajax({
+		type: "GET",
+		url: '/poster/attributes/'+id,
+		dataType: 'html',
+		success: function(data){
+			if(typeof(data) != 'undefined' && data != ''){
+				$('#load-attributes').show();
+				$('#load-attributes').html(data);
+			}else{
+				$('#load-attributes').hide();
+				$('#load-attributes').html('');				
+			}
+		}
+	});
 }
 function loadThirdLevel(id){
 	var fl = $('#secondlevel').val();
@@ -114,7 +100,7 @@ function loadThirdLevel(id){
 				$('#third-level').html('');
 				$('#four-level').html('');				
 				$('#third-level').html(categories_html);
-				loadAttribute(data.fields);
+				loadAttribute(id);
 				
 			}else{
 				$('#third-level').html('');
