@@ -54,6 +54,10 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::script('js/custom.js') }}
+    {{ HTML::script('js/jquery.validate.js') }}  
+    {{ HTML::script('js/jquery.navgoco.js') }}  
+     
+    
     <script type="text/javascript">
     $(document).ready( function() {
     $('#myCarousel').carousel({

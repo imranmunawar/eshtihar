@@ -6,7 +6,7 @@
 //exit;
 $categories = Category::where('parent_id','=', 0)->get();
 $selCat = Category::find($catid);
-//print_r($selCat);
+//print_r($posters[0]->title);
 //die;
 ?>
 <div class="container">
@@ -15,57 +15,6 @@ $selCat = Category::find($catid);
           <div class="row listBox">
             <div class="col-md-3 col-md-offset-1">
               <div class="theform login-form settings">
-
-                {{ Form::open(array('url' => 'search/result','files'=>true,'id'=>'leftSearch')) }}
-                
-                {{ Form::hidden('catid',$catid,array('id'=>'catid')) }}
-                                               
-                <h2 class="content-heading">Refine</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <label>Keyword</label>
-                      {{ Form::text('search_keyword','',array('id' => 'search_keyword','placeholder' => 'I am looking for...')) }}
-                    </div>
-                  </li>
-                </ul>
-                <h2 class="content-heading">Price</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      {{ Form::text('search_price','',array('id' => 'search_price','placeholder' => 'PKR...')) }}
-                    </div>
-                  </li>
-                </ul>                
-                <h2 class="content-heading">Make</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <select><option>Make</option></select>
-                    </div>
-                  </li>
-                </ul>     
-                <h2 class="content-heading">Model</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <select><option>Model</option></select>
-                    </div>
-                  </li>
-                </ul> 
-                
-                
-				<ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <div class="btns-left leftmrl left-manu">
-                       <input type="submit" value="Apply" class="signin-btn">
-                       <button type="button" class="btn-gray">Cancel</button>
-                     </div>
-                    </div>
-                  </li>
-                </ul>                
-                
                 <h2 class="content-heading">Browse</h2>
                 <ul id="demo1" class="nav ac-settings">
                   <?php 
@@ -80,7 +29,7 @@ $selCat = Category::find($catid);
 						  if($subCat->id == $catid){
 							 $actCls = 'selected';
 						  }
-						  $secondHTML .= '<li class="'.$actCls.'"><a href="#">'.$subCat->category.'</a></li>';
+						  $secondHTML .= '<li class="'.$actCls.'"><a href="'.URL::route('category',$subCat->id).'">'.$subCat->category.'</a></li>';
 					  }
 					  $secondHTML .= '</ul>';					  
 					  
@@ -98,8 +47,67 @@ $selCat = Category::find($catid);
                 </ul>
                 <p class="external">
                     <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
-                </p>                
-                                          
+                </p> 
+                {{ Form::open(array('url' => 'search/result','files'=>true,'id'=>'leftSearch')) }}
+                
+                {{ Form::hidden('catid',$catid,array('id'=>'catid')) }}
+                                               
+                <h2 class="content-heading">Refine</h2>
+                <ul class="ac-settings">
+                  <li>
+					<div class="form-section-right">
+                      <label>Keyword</label>
+                      {{ Form::text('search_keyword',(isset($search_keyword))?$search_keyword:'',array('id' => 'search_keyword','placeholder' => 'I am looking for...')) }}
+                    </div>
+                  </li>
+                </ul>
+                <h2 class="content-heading">Price</h2>
+                <ul class="ac-settings">
+                  <li>
+					<div class="form-section-right">
+                      {{ Form::text('search_price',(isset($search_price))?$search_price:'',array('id' => 'search_price','placeholder' => 'PKR...')) }}
+                    </div>
+                  </li>
+                </ul>
+                <?php
+				/*if($catid==2)
+				{
+					$fields = CategoryField::where('category_id','=', $catid)->get();
+					foreach($fields as $k => $field){
+                ?>                
+                
+                <h2 class="content-heading">Make</h2>
+                <ul class="ac-settings">
+                  <li>
+					<div class="form-section-right">
+                      <select><option>Make</option></select>
+                    </div>
+                  </li>
+                </ul>     
+                <h2 class="content-heading">Model</h2>
+                <ul class="ac-settings">
+                  <li>
+					<div class="form-section-right">
+                      <select><option>Model</option></select>
+                    </div>
+                  </li>
+                </ul> 
+                
+                <?php
+					}
+				}*/
+				?>
+                
+				<ul class="ac-settings">
+                  <li>
+					<div class="form-section-right">
+                      <div class="btns-left leftmrl left-manu">
+                       <input type="submit" value="Apply" class="signin-btn">
+                       <button type="button" class="btn-gray">Cancel</button>
+                     </div>
+                    </div>
+                  </li>
+                </ul>                                          
                 
                 {{ Form::close() }}
                                 
@@ -114,7 +122,7 @@ $selCat = Category::find($catid);
 						foreach($posters as $poster)
 						{
 							$cls = '';
-							if($poster->featured == 1){$cls = 'featured';}
+							//if($poster->featured == 1){$cls = 'featured';}
 						?>
 						<div class="col-md-4 box-type-2 <?php echo $cls;?>">
 						   <div class="imgbox">

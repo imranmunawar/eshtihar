@@ -1,4 +1,4 @@
-$('#ad-state').on('change', function(){
+$('#ad_state').on('change', function(){
         
 	var selected_state = $(this).val();
 	//alert(selected_country);
@@ -55,6 +55,8 @@ function loadSecondLevel(id){
 				$('#third-level').html('');
 				$('#four-level').html('');				
 				$('#second-level').html(categories_html);
+				$('#load-attributes').hide();
+				$('#load-attributes').html('');				
 			}
 		}
 	});
@@ -209,3 +211,174 @@ $( document ).ready(function() {
     };	
 
 });
+
+$().ready(function() {
+	// validate signup form on keyup and submit
+	
+	$("#postmyad").validate({
+
+	rules: {
+		firstlevel:{
+			required: true,
+		},
+		ad_title: {
+			required: true,
+			minlength: 5
+		},
+		ad_price: {
+			required: true,
+			minlength: 3,
+			number: true
+		},
+		ad_text: {
+			required: true,
+			minlength: 10			
+		},
+		ad_state: {
+			required: true
+		},	
+		city: {
+			required: true
+		},			
+		ad_uname: {
+			required: true,
+			minlength: 3			
+		},		
+		ad_uemail: {
+			required: true,
+			email: true
+		},
+		ad_uphone: {
+			required: true,
+			minlength: 11,
+			digits: true
+		},		
+	},
+	messages: {
+		firstlevel:{
+			required: "Please Please category",
+		},
+		ad_title: {
+			required: "Please enter a ad title",
+			minlength: "Your title must consist of at least 5 characters"
+		},
+		ad_price: {
+			required: "Please provide a ad price",
+			minlength: "Your price must be at least 3 characters long",
+			number: "Please enter a valid number"
+		},
+		ad_state: {
+			required: "Please select province"
+		},	
+		city: {
+			required: "Please select city"
+		},		
+		ad_text: {
+			required: "Please provide description",
+			minlength: "Your description must be at least 10 characters",
+		},			
+		ad_uname: {
+			required: "Please provide a user name",
+			minlength: "Your user name must be at least 3 characters long",
+		},
+		ad_uemail: "Please enter a valid email address",
+		ad_uphone: {
+			required: "Please enter phone number",
+			minlength: "Your phone must be at least 11 characters long",
+			digits: "Please enter a valid number"
+		},
+	}
+	}); 
+});
+function checkForm(){
+	var fl = $('#firstlevel').val();
+	var second = $('#second-level li').hasClass('last-active');
+	var third = $('#third-level li').hasClass('last-active');
+	var four = $('#four-level li').hasClass('last-active');
+	if(fl==''){
+		$('#ad_cats_error').show();
+		return false;	
+	}else if(second == true || third == true || four == true){
+		extraFormValidation();
+		$('#ad_cats_error').hide();
+		return true;
+	}
+	else{
+		$('#ad_cats_error').show();
+		return false;		
+	}
+}
+function extraFormValidation(){
+	attrHTML = $('#load-attributes').html();	
+	if(attrHTML!=''){
+		empty_flds = 0;
+		$(".required").each(function() {
+			if(!$.trim($(this).val())) {
+				empty_flds++;
+			}    
+		 });	
+		 return true;
+	}else{
+		return true;
+	}
+}
+$(document).ready(function() {
+	// Initialize navgoco with default options
+	$("#demo1").navgoco({
+		caretHtml: '',
+		accordion: false,
+		openClass: 'open',
+		save: true,
+		cookie: {
+			name: 'navgoco',
+			expires: false,
+			path: '/'
+		},
+		slide: {
+			duration: 400,
+			easing: 'swing'
+		},
+		// Add Active class to clicked menu item
+		onClickAfter: function(e, submenu) {
+			e.preventDefault();
+			$('#demo1').find('li').removeClass('active');
+			var li =  $(this).parent();
+			var lis = li.parents('li');	
+			li.addClass('active');
+			lis.addClass('active');
+		},
+	});
+
+	$("#collapseAll").click(function(e) {
+		e.preventDefault();
+		$("#demo1").navgoco('toggle', false);
+	});
+
+	$("#expandAll").click(function(e) {
+		e.preventDefault();
+		$("#demo1").navgoco('toggle', true);
+	});
+});
+
+function searchMe(){
+		
+	$.ajax({
+		type: "GET",
+		url: '/search/'+selected_state,
+		dataType: 'json',
+		success: function(data){
+			if(typeof(data) != 'undefined' && data.status == 'success' && data.cities != ''){
+				//$('#load-cities').show();
+				cities_html = '<option value="">Select City</option>';
+				$.each(data.cities, function(key, value)
+				{
+					cities_html += '<option value="'+value.id+'">'+value.city_name+'</option>';
+				}); 
+				
+				$('#city').html(cities_html);
+				
+			}
+		}
+	});
+		
+}

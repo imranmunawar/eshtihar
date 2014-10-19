@@ -8,23 +8,23 @@ foreach($fields as $k => $field){
 	  if($field->field_type=='text'){
 	  ?>
       <div class="form-section-right">
-      {{ Form::text('option'.$field->id) }}
+      {{ Form::text('option'.$field->id,'',array('class'=>'required')) }}
       </div>
       <?php
       }elseif($field->field_type=='list'){
 	   $arr = json_decode($field->field_value) ; 
 	   ?>
        <div class="form-section-right selectinside location">
-       	  <select>
+       	  <select class="required" name="option<?php echo $field->id;?>">
           	<?php
 			foreach($arr as $opt){ 
 			?>
-            <option><?php echo $opt;?></option>
+            <option value="<?php echo $opt;?>"><?php echo $opt;?></option>
             <?php 
 			}
 			?>
           </select>
-		 {{-- Form::select('option'.$field->id, $field->field_value, isset('option'.$field->id]) ? 'option'.$field->id: '',array('id'=>'option'.$field->id)) --}}
+
       </div>
 	  <?php
       }

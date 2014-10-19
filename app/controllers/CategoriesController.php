@@ -17,10 +17,12 @@ class CategoriesController extends BaseController {
 
 	public function view($id)
 	{
-		$view = View::make('categories.view')->with('title' , 'Home');
-		$posters = Poster::where('child_category','=',$id)
-							->select('posters.id', 'posters.title', 'posters.detail', 'posters.created_at', 'categories.name as catname', 'posters.city', 'posters.price')
-							->join('categories', 'posters.child_category', '=', 'categories.id')
+		$catid = Input::get('catid');
+		if($catid){$id=$catid;}
+		$view  = View::make('categories.view')->with('title' , 'Home');
+		$posters = Poster::where('category_id','REGEXP', '(^|,)'.$id.'($|,)')
+							->select('posters.id', 'posters.title', 'posters.detail', 'posters.created_at', 'categories.category as catname', 'posters.price')
+							->join('categories', 'posters.category_id', '=', 'categories.id')
 							->orderby('posters.created_at','desc')
 							->get();
 		//print_r($posters);

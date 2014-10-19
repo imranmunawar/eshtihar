@@ -6,15 +6,22 @@
  		@if($errors->has())
         <div class="alert alert-danger" role="alert">{{ $errors->first() }}</div>
         @endif
-	  {{ Form::open(array('url' => 'poster/createad','files'=>true,'id'=>'postmyad')) }}
+	  {{ Form::open(array('url' => 'poster/createad','files'=>true,'id'=>'postmyad','onsubmit'=>'return checkForm();')) }}
       <div class="row">
         <div>
           <div class="row">
             <div class="col-md-7 full-form">
 
 			<div class="signup-form">
-                <h2 class="content-heading">Select Categories</h2>               
+                <h2 class="content-heading">Select Categories</h2> 
+                <label id="ad_cats_error" class="cerror" style="display:none;">Please select the lowest level category for your ad before continuing</label>              
                   <div class="form-section">
+                  
+                        {{ Form::hidden('firstlevel','',array('id'=>'firstlevel')) }}
+                        {{ Form::hidden('secondlevel','',array('id'=>'secondlevel')) }}
+                        {{ Form::hidden('thirdlevel','',array('id'=>'thirdlevel')) }} 
+                        {{ Form::hidden('fourlevel','',array('id'=>'fourlevel')) }}  
+                                        
                   		<div class="cols-box">
                             <ul>
                             	<?php 
@@ -71,7 +78,7 @@
 					<div class="form-section">
                     <label class="control-label form-section-left">Title<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_title') }}
+                      {{ Form::text('ad_title','',array('id' => 'ad_title')) }}
                     </div>
                     <div class="form-section-third">
                     </div>
@@ -79,7 +86,7 @@
 				  <div class="form-section">
                     <label class="control-label form-section-left">Price<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_price') }}
+                      {{ Form::text('ad_price','',array('id' => 'ad_price')) }}
                     </div>
                     <div class="form-section-third">
                     </div>
@@ -92,7 +99,7 @@
                    <div class="form-section">
                     <label class="control-label form-section-left">Description <span class="impred">*</span></label>
                     <div class="form-section-right add-section">
-                      {{ Form::textarea('ad_text', null, ['size'=>'30x5']) }}
+                      {{ Form::textarea('ad_text', null, ['size'=>'30x5','id'=>'ad_text']) }}
                     </div>
                     <div class="cb"></div>
                   </div>
@@ -139,7 +146,7 @@
                     
                     <div class="form-section-right selectinside location">
 						{{-- Form::select('states', $states, '') --}}
-						{{ Form::select('states', $states, isset($states['id']) ? $states['id']: '',array('id'=>'ad-state')) }}                            
+						{{ Form::select('states', $states, isset($states['id']) ? $states['id']: '',array('id'=>'ad_state')) }}                            
                     </div>
                   </div>
 				  <div class="form-section" id="load-cities">
@@ -160,7 +167,7 @@
                   <div class="form-section">
                     <label class="control-label form-section-left">Name<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_uname') }}
+                      {{ Form::text('ad_uname','',array('id' => 'ad_uname')) }}
                     </div>
                     <div class="form-section-third">
                     </div>
@@ -168,7 +175,7 @@
 				  <div class="form-section">
                     <label class="control-label form-section-left">Email<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_uemail') }}
+                      {{ Form::text('ad_uemail','',array('id' => 'ad_uemail')) }}
                     </div>
                     <div class="form-section-third">
                     </div>
@@ -176,8 +183,7 @@
 				  <div class="form-section">
                     <label class="control-label form-section-left">Phone<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_uphone') }}
-                    </div>
+                      {{ Form::text('ad_uphone','',array('id' => 'ad_uphone')) }}                    </div>
                     <div class="form-section-third">
                     </div>
                   </div>  
@@ -208,10 +214,6 @@
               </div>
             </div>
 
-            {{ Form::hidden('firstlevel','',array('id'=>'firstlevel')) }}
-            {{ Form::hidden('secondlevel','',array('id'=>'secondlevel')) }}
-            {{ Form::hidden('thirdlevel','',array('id'=>'thirdlevel')) }} 
-            {{ Form::hidden('fourlevel','',array('id'=>'fourlevel')) }}
             {{ Form::hidden('num-image','',array('id'=>'num-image')) }}                                
 
           </div>

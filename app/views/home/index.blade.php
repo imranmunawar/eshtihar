@@ -15,7 +15,7 @@
         <div class="carousel-inner testi-slider">
           <div class="item active">
             <div class="testi-content">
-              <img src="img/manager-01.png">
+              <img src="img/manager-01.png" width="200" height="100">
               <img src="img/manager-01.png">
               <img src="img/manager-01.png">
               <img src="img/manager-01.png">
@@ -59,14 +59,14 @@
                   <li class="box-type-3">
                     <a href="#"><img src="{{ URL::to('/'); }}/img/cats/<?php echo $mainCat->cat_img;?>"></a>
                     <div class="karma-right">
-                     <h2 class="shop-box-title"><a href="#"><?php echo $mainCat->category;?></a></h2>
+                     <h2 class="shop-box-title"><a href="{{ URL::route('category',$mainCat->id) }}"><?php echo $mainCat->category;?></a></h2>
                     <div class="author-detail">
                       <div class="author-name">
 						<?php
 						if(isset($mainCat['sub'])){
 							foreach($mainCat['sub'] as $k => $subCat){
 							?>                      
-							<p><a href="#"><?php echo $subCat->category; ?></a></p>
+							<p><a href="{{ URL::route('category',$subCat->id) }}"><?php echo $subCat->category; ?></a></p>
 							<?php
 							 }
 						}

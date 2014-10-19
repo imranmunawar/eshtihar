@@ -187,4 +187,37 @@ h2.shop-box-title {
 .karamaShop {
     background: none repeat scroll 0 0 #fff;
 }
+.error,
+.cerror{ color:#F00; font-size:12px;}
+.searchArea {
+    background-color: #00cc99;
+}
+.searchArea ul li input[type="button"] {
+    background: none repeat scroll 0 0 #2386c8;
+}
+.searchArea ul li input[type="button"]:hover {
+    background: none repeat scroll 0 0 #ff0080;
+	border: 1px solid #ff0080;
+}
+.searchArea ul li select {
+    border: 1px solid #18bc9c;
+}
+.searchArea ul li input[type="text"] {
+     border: 1px solid #18bc9c;
+}
+.searchArea ul {
+    padding: 5px;
+}
+#demo1 li ul li{ list-style:none;}
+#demo1 li ul li.selected a{ color:#ff0080;padding: 2px 0;}
+#demo1 li ul li a { background:none;color:#2386c8;}
+#demo1 li ul li a:hover { background:none;color:#ff0080;}
+#demo1 li ul{ padding-left:15px;}
+.btns-left.left-manu {
+    margin-left: 0px;
+}
+.btns-left.left-manu .signin-btn { min-width:100px;}
+.btns-left.left-manu button.btn-gray {
+    min-width: 94px;
+}
 /*2386c8*/

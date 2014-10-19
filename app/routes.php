@@ -36,6 +36,10 @@ Route::group(array('before' => 'guest'), function() {
 		/*
 		 * Get cities of country (GET)
 		 */
+		 Route::post('/search/result', array(
+			'as' => 'search',
+			'uses' => 'SearchController@getSearch'
+		 ));		 
 		
 	 });
 	/*
@@ -60,5 +64,9 @@ Route::group(array('before' => 'guest'), function() {
 	Route::get('/poster/attributes/{id}', array(
 			   'as' => 'attribes',
 		       'uses' => 'PosterController@getAttributes'
-	 ));		
+	 ));
+	 Route::get('/search/', array(
+		'as' => 'search',
+		'uses' => 'SearchController@getSearch'
+	 ));	 		
 });

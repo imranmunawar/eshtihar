@@ -62,7 +62,7 @@ class PosterController extends BaseController {
 			}
 			if($fourLevel!=''){
 				$category = $category.','.$fourLevel;
-			}
+			}			
 			
 			$title  = Input::get('ad_title');
 			$detail = Input::get('ad_text');
@@ -92,7 +92,19 @@ class PosterController extends BaseController {
 			);			
 			//DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
 			$poster = Poster::create($postArray);	
-			
+
+			$catFields  = CategoryField::where('category_id', '=', $secondLevel)->orderBy('field_label')->get(array('id', 'field_label', 'field_type', 'field_value'));				
+			foreach($catFields as $field){
+				$fieldVal  = Input::get('option'.$field->id);
+				if(isset($fieldVal) && $fieldVal!=''){
+					$optArray = array(
+									'category_id' => $secondLevel,
+									'field_option_id' => $field->id,
+									'field_option_val' => $fieldVal																												
+								);
+					PosterOptions::create($optArray);					
+				}				
+			}
 
             /////upload images////
             if (!empty($_FILES)) {
