@@ -36,7 +36,7 @@ class PosterController extends BaseController {
                     'firstlevel' => 'required|max:10',
                     'secondlevel' => 'required|max:4',
 					'ad_title' => 'required|min:5',
-					'ad_text' => 'required|min:200',
+					'ad_text' => 'required|min:50',
 					'ad_price' => 'required',
 					'states' => 'required',
 					'cities' => 'required',
@@ -100,9 +100,9 @@ class PosterController extends BaseController {
 					$optArray = array(
 									'category_id' => $secondLevel,
 									'field_option_id' => $field->id,
-									'field_option_val' => $fieldVal																												
+									'field_option_val' => $fieldVal,																										
 								);
-					PosterOptions::create($optArray);					
+					PosterOption::create($optArray);					
 				}				
 			}
 

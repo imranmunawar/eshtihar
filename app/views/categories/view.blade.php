@@ -25,7 +25,7 @@ $selCat = Category::find($catid);
                   <li>
 					<div class="form-section-right">
                       <label>Keyword</label>
-                      {{ Form::text('search_keyword','',array('id' => 'search_keyword','placeholder' => 'I am looking for...')) }}
+                      {{ Form::text('search_keyword',(isset($search_keyword))?$search_keyword:'',array('id' => 'search_keyword','placeholder' => 'I am looking for...')) }}
                     </div>
                   </li>
                 </ul>
@@ -33,26 +33,52 @@ $selCat = Category::find($catid);
                 <ul class="ac-settings">
                   <li>
 					<div class="form-section-right">
-                      {{ Form::text('search_price','',array('id' => 'search_price','placeholder' => 'PKR...')) }}
+                      {{ Form::text('search_price1','',array('id' => 'search_price1','placeholder' => 'MIN')) }} - 
+                      {{ Form::text('search_price2','',array('id' => 'search_price2','placeholder' => 'MAX')) }}
                     </div>
                   </li>
                 </ul>                
-                <h2 class="content-heading">Make</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <select><option>Make</option></select>
-                    </div>
-                  </li>
-                </ul>     
-                <h2 class="content-heading">Model</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <select><option>Model</option></select>
-                    </div>
-                  </li>
-                </ul> 
+                <?php
+				if($catid==2)
+				{
+					$fields = CategoryField::where('category_id','=', $catid)->get();
+					foreach($fields as $k => $field){
+						if($field->field_type=='text'){
+						?>                
+						<h2 class="content-heading"><?php echo $field->field_label?></h2>
+                        <ul class="ac-settings">
+                          <li>
+                            <div class="form-section-right">
+                              {{ Form::text('option'.$field->id,'',array('class'=>'required')) }}
+                            </div>
+                          </li>
+                        </ul> 
+                      	<?php
+						}
+						if($field->field_type=='list'){
+							 $arr = json_decode($field->field_value); 
+						?>    
+                            <h2 class="content-heading">Model</h2>
+                            <ul class="ac-settings">
+                              <li>
+                                <div class="form-section-right">
+                                  <select name="option<?php echo $field->id;?>">
+                                    <?php
+									foreach($arr as $opt){ 
+									?>
+									<option value="<?php echo $opt;?>"><?php echo $opt;?></option>
+									<?php 
+									}
+									?>
+                                  </select>
+                                </div>
+                              </li>
+                            </ul> 
+					<?php
+						}
+					}
+				}
+				?>
                 
                 
 				<ul class="ac-settings">

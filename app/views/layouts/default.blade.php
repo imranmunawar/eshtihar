@@ -24,31 +24,12 @@
   
   	@include('layouts.header')
 
-    <div class="container-fluid searchArea">
-      <div class="container">
-        <div class="row">
-        <form>
-          <ul>
-          	<li><select><option>Location</option></select></li>
-            <li><select><option>Category</option></select></li>
-            <li><input type="text" placeholder="I am looking for..." /></li>
-            <li><input type="button" value="Search"></li>
-          </ul>
-          </form>
-        </div>
-      </div>      
-    </div>
+    @include('layouts.search')
     
     @yield('content') 
-	   
 
     @include('layouts.footer')
     
-    
-    
-
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     {{ HTML::script('js/jquery.min.js') }}
     <!-- Include all compiled plugins (below), or include individual files as needed -->

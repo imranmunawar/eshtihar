@@ -5,7 +5,6 @@
 //print_r($categories[1]->name);
 //exit;
 $categories = Category::where('parent_id','=', 0)->get();
-$selCat = Category::find($catid);
 //print_r($posters[0]->title);
 //die;
 ?>
@@ -15,42 +14,10 @@ $selCat = Category::find($catid);
           <div class="row listBox">
             <div class="col-md-3 col-md-offset-1">
               <div class="theform login-form settings">
-                <h2 class="content-heading">Browse</h2>
-                <ul id="demo1" class="nav ac-settings">
-                  <?php 
-				  foreach($categories as $category){
-					  $act = '';
-					  $secondHTML = '';
-					  
-					  $secondLevel = Category::where('parent_id','=', $category->id)->get();
-					  $secondHTML = '<ul>';
-					  foreach($secondLevel as $subCat){
-						  $actCls = '';
-						  if($subCat->id == $catid){
-							 $actCls = 'selected';
-						  }
-						  $secondHTML .= '<li class="'.$actCls.'"><a href="'.URL::route('category',$subCat->id).'">'.$subCat->category.'</a></li>';
-					  }
-					  $secondHTML .= '</ul>';					  
-					  
-					  if($category->id == $selCat->parent_id){						  
-						  $act = 'active';
-					  }
-				  ?>
-                  <li class="<?php echo $act;?>">
-                  	<a href="#"><?php echo $category->category;?></a>
-                    <?php echo $secondHTML;?>
-                  </li>                  
-                  <?php
-				  }
-				  ?>
-                </ul>
-                <p class="external">
-                    <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
-                </p> 
+ 
                 {{ Form::open(array('url' => 'search/result','files'=>true,'id'=>'leftSearch')) }}
                 
-                {{ Form::hidden('catid',$catid,array('id'=>'catid')) }}
+                {{ Form::hidden('catid',isset($catid)?$catid:'',array('id'=>'catid')) }}
                                                
                 <h2 class="content-heading">Refine</h2>
                 <ul class="ac-settings">
@@ -65,37 +32,51 @@ $selCat = Category::find($catid);
                 <ul class="ac-settings">
                   <li>
 					<div class="form-section-right">
-                      {{ Form::text('search_price',(isset($search_price))?$search_price:'',array('id' => 'search_price','placeholder' => 'PKR...')) }}
+                      {{ Form::text('search_price1',(isset($search_price1))?$search_price1:'',array('id' => 'search_price1','placeholder' => 'MIN')) }} - 
+                      {{ Form::text('search_price2',(isset($search_price2))?$search_price2:'',array('id' => 'search_price2','placeholder' => 'MAX')) }}                      
                     </div>
                   </li>
                 </ul>
                 <?php
-				/*if($catid==2)
+				if(isset($catid) && $catid==2)
 				{
 					$fields = CategoryField::where('category_id','=', $catid)->get();
 					foreach($fields as $k => $field){
-                ?>                
-                
-                <h2 class="content-heading">Make</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <select><option>Make</option></select>
-                    </div>
-                  </li>
-                </ul>     
-                <h2 class="content-heading">Model</h2>
-                <ul class="ac-settings">
-                  <li>
-					<div class="form-section-right">
-                      <select><option>Model</option></select>
-                    </div>
-                  </li>
-                </ul> 
-                
-                <?php
+						if($field->field_type=='text'){
+						?>                
+						<h2 class="content-heading"><?php echo $field->field_label?></h2>
+                        <ul class="ac-settings">
+                          <li>
+                            <div class="form-section-right">
+                              {{ Form::text('option'.$field->id,'',array('class'=>'required')) }}
+                            </div>
+                          </li>
+                        </ul> 
+                      	<?php
+						}
+						if($field->field_type=='list'){
+							 $arr = json_decode($field->field_value); 
+						?>    
+                            <h2 class="content-heading"><?php echo $field->field_label?></h2>
+                            <ul class="ac-settings">
+                              <li>
+                                <div class="form-section-right">
+                                  <select name="option<?php echo $field->id;?>">
+                                    <?php
+									foreach($arr as $opt){ 
+									?>
+									<option value="<?php echo $opt;?>"><?php echo $opt;?></option>
+									<?php 
+									}
+									?>
+                                  </select>
+                                </div>
+                              </li>
+                            </ul> 
+					<?php
+						}
 					}
-				}*/
+				}
 				?>
                 
 				<ul class="ac-settings">
@@ -108,6 +89,40 @@ $selCat = Category::find($catid);
                     </div>
                   </li>
                 </ul>                                          
+                
+                <h2 class="content-heading">Browse</h2>
+                <ul id="demo1" class="nav ac-settings">
+                  <?php 
+				  foreach($categories as $category){
+					  $act = '';
+					  $secondHTML = '';
+					  
+					  $secondLevel = Category::where('parent_id','=', $category->id)->get();
+					  $secondHTML = '<ul>';
+					  foreach($secondLevel as $subCat){
+						  $actCls = '';
+						  if(isset($catid) && $subCat->id == $catid){
+							 $actCls = 'selected';
+						  }
+						  $secondHTML .= '<li class="'.$actCls.'"><a href="'.URL::route('category',$subCat->id).'">'.$subCat->category.'</a></li>';
+					  }
+					  $secondHTML .= '</ul>';					  
+					  
+					  if(isset($selCat) && $category->id == $selCat->parent_id){						  
+						  $act = 'active';
+					  }
+				  ?>
+                  <li class="<?php echo $act;?>">
+                  	<a href="#"><?php echo $category->category;?></a>
+                    <?php echo $secondHTML;?>
+                  </li>                  
+                  <?php
+				  }
+				  ?>
+                </ul>
+                <p class="external">
+                    <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+                </p>                
                 
                 {{ Form::close() }}
                                 

@@ -232,7 +232,7 @@ $().ready(function() {
 		},
 		ad_text: {
 			required: true,
-			minlength: 10			
+			minlength: 50			
 		},
 		ad_state: {
 			required: true
@@ -275,7 +275,7 @@ $().ready(function() {
 		},		
 		ad_text: {
 			required: "Please provide description",
-			minlength: "Your description must be at least 10 characters",
+			minlength: "Your description must be at least 50 characters",
 		},			
 		ad_uname: {
 			required: "Please provide a user name",

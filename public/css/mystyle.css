@@ -182,7 +182,7 @@ h2.shop-box-title {
 }
 .container-fluid {
     position: relative;
-    top: -20px;
+    top: -40px;
 }
 .karamaShop {
     background: none repeat scroll 0 0 #fff;
@@ -192,10 +192,10 @@ h2.shop-box-title {
 .searchArea {
     background-color: #00cc99;
 }
-.searchArea ul li input[type="button"] {
+.searchArea ul li input[type="submit"] {
     background: none repeat scroll 0 0 #2386c8;
 }
-.searchArea ul li input[type="button"]:hover {
+.searchArea ul li input[type="submit"]:hover {
     background: none repeat scroll 0 0 #ff0080;
 	border: 1px solid #ff0080;
 }
@@ -219,5 +219,18 @@ h2.shop-box-title {
 .btns-left.left-manu .signin-btn { min-width:100px;}
 .btns-left.left-manu button.btn-gray {
     min-width: 94px;
+}
+.ac-settings #search_price1,
+.ac-settings #search_price2 {
+	width:45%;
+}
+.searchArea ul li input[type="submit"] {
+    border: 1px solid #2386c8;
+    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 6px 14px;
+    text-shadow: none;
+    width: 172px;
 }
 /*2386c8*/
