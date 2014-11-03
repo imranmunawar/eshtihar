@@ -25,7 +25,7 @@ class SearchController extends BaseController {
 		
 		$view = View::make('search.list')->with('title' , 'Search List');
 		$posters = DB::table('posters');
-		$posters->select('posters.id', 'posters.title', 'posters.detail', 'posters.created_at', 'categories.category as catname', 'posters.price');
+		$posters->select('posters.id', 'posters.title', 'posters.detail', 'posters.created_at', 'categories.category as catname', 'posters.price', 'posters.city_id');
 		if(trim($search_keyword)!=''){
 			$posters->where('posters.title', 'LIKE', '%'.$search_keyword.'%');
 			//$posters->orwhere('posters.detail', 'LIKE', '%'.$search_keyword.'%');		
@@ -37,8 +37,9 @@ class SearchController extends BaseController {
 		if(trim($location)!=''){
 			$posters->where('posters.city_id', '=', $location);
 		}
+		$posters->join('categories', 'posters.category_id', '=', 'categories.id');		
 		if(isset($catid) && $catid!=''){				
-			$posters->where('category_id', 'REGEXP', '(^|,)'.$catid.'($|,)');
+			$posters->where('posters.category_id', 'REGEXP', '(^|,)'.$catid.'($|,)');
 			$selCat = Category::find($catid);
 			$view->catid = $catid;	
 			$view->selCat = $selCat;
@@ -47,9 +48,24 @@ class SearchController extends BaseController {
 			}else{
 				$view->parentId = $selCat->parent_id;
 			}								
+			
+		}		
+		$posters->groupby('posters.id');
+		//$posters->orderby('posters.created_at','desc');
+		if(isset($catid) && $catid!=''){
+			
+			$fields = CategoryField::where('category_id','=', $catid)->get();
+			$posters->join('poster_options', 'posters.id', '=', 'poster_options.poster_id');
+			$con = '';
+			foreach($fields as $k => $field){
+				$option = Input::get('option'.$field->id);
+				
+				if(isset($option) && $option!=''){
+					$posters->havingRaw('sum(poster_options.field_option_val) = "'.$option.'"');
+				}
+			}					
+			
 		}
-		$posters->join('categories', 'posters.category_id', '=', 'categories.id');
-		$posters->orderby('posters.created_at','desc');
 		$result = $posters->get();
 		
 		//print_r($result);

@@ -21,7 +21,7 @@ class CategoriesController extends BaseController {
 		if($catid){$id=$catid;}
 		$view  = View::make('categories.view')->with('title' , 'Home');
 		$posters = Poster::where('category_id','REGEXP', '(^|,)'.$id.'($|,)')
-							->select('posters.id', 'posters.title', 'posters.detail', 'posters.created_at', 'categories.category as catname', 'posters.price')
+							->select('posters.id', 'posters.title', 'posters.detail', 'posters.created_at', 'categories.category as catname', 'posters.price', 'posters.city_id')
 							->join('categories', 'posters.category_id', '=', 'categories.id')
 							->orderby('posters.created_at','desc')
 							->get();

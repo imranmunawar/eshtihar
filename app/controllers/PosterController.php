@@ -100,6 +100,7 @@ class PosterController extends BaseController {
 					$optArray = array(
 									'category_id' => $secondLevel,
 									'field_option_id' => $field->id,
+									'poster_id' => $poster->id,
 									'field_option_val' => $fieldVal,																										
 								);
 					PosterOption::create($optArray);					
@@ -161,4 +162,40 @@ class PosterController extends BaseController {
 	public function getList(){
 		$view = View::make('poster.list')->with('title' , 'Post a free ad');
 	}	
+	public function getDetail($id)
+	{
+		$poster  = Poster::where('id', '=', $id)->get(array('id', 'title', 'detail', 'price', 'seller_name', 'seller_phone', 'seller_email', 'created_at', 'updated_at', 'city_id', 'user_id'));									
+	
+		$view = View::make('poster.detail')->with('title' , 'Post a free ad');
+		$view->poster = $poster;
+		$view->id = $id;
+		return $view;
+	}
+	public function postDetail($id)
+	{	$id = Input::get('pid');							
+		$poster  = Poster::where('id', '=', $id)->get(array('id', 'title', 'seller_name','seller_email', 'user_id'));	
+		$email = Input::get('email');
+		$messge = Input::get('message');
+		if(trim($email)!='' && trim($messge)!=''){
+			$validator = Validator::make(Input::all(), array(
+						'message' => 'required|min:20',
+						'email' => 'required|max:50|email',
+					));	
+			if($validator->fails()) {
+				return Redirect::route('poster-detail')
+								->withErrors($validator)
+								->withInput();		
+			}else{
+					$data = array('title' => $poster[0]->title, 'username' => $poster[0]->seller_name);				
+                    Mail::send('emails.poster.message', $data, 
+								function($message) use ($poster) {
+                                	//$message->from($email, 'eshtihar.com user'));
+									$message->to($poster[0]->seller_email, $poster[0]->seller_name)->subject('You have new message about your Ad: "'.$poster[0]->title.'"');
+                            	}
+							   );
+					return Redirect::route('poster-detail',$id)->with('message_success', 'You message has been sent successfully!');	
+			
+			}
+		}
+	}		
 }

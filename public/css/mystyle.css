@@ -233,4 +233,90 @@ h2.shop-box-title {
     text-shadow: none;
     width: 172px;
 }
+.profile-popover {
+    padding: 0;
+}
+.col-md-offset-1 {
+    margin-left: 2.333%;
+}
+.popover-left {
+    width: 287px;
+}
+.popover-left .user-info h2 {
+	margin-top:5px;
+	font-size:14px;
+	width: 246px;
+}
+.popover-left .user-info img {
+    float: left;
+    margin-right: 8px;
+    width: 50px;
+}
+.popover-left .user-info .user-age {
+    font-weight: normal;
+	font-size:10px;
+	width:200px;
+}
+.popover-left input[type="submit"] {
+    border: 1px solid #00cc99;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 6px 14px;
+    text-shadow: none;
+    width: 246px;
+ 	background: none repeat scroll 0 0 #00cc99;	
+}
+.popover-left input[type="submit"]:hover {
+    border: 1px solid #ff0080;
+ 	background: none repeat scroll 0 0 #ff0080;	
+}
+.popover-left .price-num{ 
+    border: 1px dashed #666;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    width: 245px;
+}
+.popover-left .contact-num{ margin-top:10px;margin-bottom:10px;}
+.popover-right .popover-image {
+	border:1px solid #a9aeb1;
+}
+.cap-popover-img {
+    border-bottom: none;
+}
+.popover-right .popover-image h2{margin-left: 10px;margin-top: 5px; font-size:24px;margin-bottom: 5px;}
+.popover-right .popover-image .loc-date{ margin-left:10px; margin-bottom:5px; color:#888888;}
+.popover-right .cap-popover-img h2{margin-left: 0px;margin-top: 5px; font-size:18px;margin-bottom: 5px;}
+.profileprojects{ width:846px;}
+.box-type-2 img{ width:265px;}
+.simlar-ad .col-md-12{ padding-left:0px; margin-bottom:10px;}
+.simlar-ad h2.content-heading{ margin-top:15px; }
+.simlar-ad h2.similar-box{ margin-top:0px; }
+h2.box-2-title{ font-size:18px;}
+.type-2 { margin-bottom:0px;}
+.popover-left .message-box{ margin-top:10px;margin-bottom:10px;}
+.popover-left .message-box textarea{ width:245px;}
+.popover-left .message-box input[type="button"]{ 
+	background: none repeat scroll 0 0 #ff0080;
+	border: 1px solid #ff0080;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 6px 14px;
+    text-shadow: none;
+    width: 246px;
+	
+}
+.popover-left .message-box input[type="button"]:hover{ background: none repeat scroll 0 0 #00cc99;border: 1px solid #00cc99;}
+.popover-left .message-box input{ 
+    width: 245px;
+	margin-bottom:5px;
+	padding:5px;
+	border: 1px solid #d8dee1;
+}
+
+
 /*2386c8*/

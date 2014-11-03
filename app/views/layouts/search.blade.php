@@ -1,6 +1,8 @@
 ﻿<?php
 $cities = City::where('state_id','=', 2)->get();
 $categories = Category::where('parent_id','=', 0)->get();
+$action = Route::currentRouteAction();
+if($action != 'posterController@getDetail'){
 ?>
 <div class="container-fluid searchArea">
   <div class="container">
@@ -42,3 +44,6 @@ $categories = Category::where('parent_id','=', 0)->get();
     </div>
   </div>      
 </div>
+<?php 
+}
+?>

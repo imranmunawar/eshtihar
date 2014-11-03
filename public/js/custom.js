@@ -345,7 +345,7 @@ $(document).ready(function() {
 			var li =  $(this).parent();
 			var lis = li.parents('li');	
 			li.addClass('active');
-			lis.addClass('active');
+			//lis.addClass('active');
 		},
 	});
 
@@ -379,6 +379,39 @@ function searchMe(){
 				
 			}
 		}
-	});
-		
+	});	
 }
+function searchResult(id){
+	//c = $("#catid").val();
+	//$('#leftSearch').submit();		
+}
+
+
+$().ready(function() {
+	// validate signup form on keyup and submit
+	
+	$("#postmessage").validate({
+
+	rules: {
+
+		message: {
+			required: true,
+			minlength: 20			
+		},
+		
+		email: {
+			required: true,
+			email: true
+		},
+		
+	},
+	messages: {
+		message: {
+			required: "Please provide description",
+			minlength: "Your description must be at least 20 characters",
+		},			
+		email: "Enter a valid email address",
+		}
+	}); 
+});
+

@@ -104,12 +104,12 @@ $categories = Category::where('parent_id','=', 0)->get();
 						  if(isset($catid) && $subCat->id == $catid){
 							 $actCls = 'selected';
 						  }
-						  $secondHTML .= '<li class="'.$actCls.'"><a href="'.URL::route('category',$subCat->id).'">'.$subCat->category.'</a></li>';
+						  $secondHTML .= '<li class="'.$actCls.'"><a href="javascript:void(0);" onclick="searchResult(\''.$subCat->id.'\');">'.$subCat->category.'</a></li>';
 					  }
 					  $secondHTML .= '</ul>';					  
 					  
 					  if(isset($selCat) && $category->id == $selCat->parent_id){						  
-						  $act = 'active';
+						  $act = 'open active';
 					  }
 				  ?>
                   <li class="<?php echo $act;?>">
@@ -136,25 +136,29 @@ $categories = Category::where('parent_id','=', 0)->get();
 					if(count($posters) > 0){
 						foreach($posters as $poster)
 						{
+							$resources = MediaResource::where('poster_id','=', $poster->id)->take(1)->get();
+							//$category = Category::where('id','=', $catid)->take(1)->get();
+							$city = City::where('id','=', $poster->city_id)->take(1)->get();
+							//print_r($resources[0]->upload);
 							$cls = '';
 							//if($poster->featured == 1){$cls = 'featured';}
 						?>
 						<div class="col-md-4 box-type-2 <?php echo $cls;?>">
 						   <div class="imgbox">
-						  <a href="#"><img src="{{ URL::to('/'); }}/uploads/poster/3d7dce1c37ba00e4d7d4e344f2e0b2bb-1413154578-imagtewtes.jpg"></a>
+						  <a href="#"><img src="{{ URL::to('/'); }}/uploads/poster/<?php echo $resources[0]->upload;?>"></a>
 						  </div>
 						  <div class="box-2-disc">
 							<h2 class="box-2-title">
-							<a href="#">
+							<a href="{{ URL::route('poster-detail',$poster->id) }}">
 								<?php if(strlen($poster->title) <= 50){echo $poster->title;}else{echo substr($poster->title,0,50).'...';}?>
 							</a>
 							</h2>
 							<div class="status-bar">
-							<p><span>Lahore | Car</span></p>
+							<p><span><?php echo $city[0]->city_name;?> | car</span></p>
 							</div>                        
 							<p><?php if(strlen($poster->detail) <= 80){echo $poster->detail;}else{echo substr($poster->detail,0,80).'...';}?></p>
 							<p><strong><?php echo GeneralPurpose::timeAgo($poster->created_at);?></strong></p>
-							<a href="#">More</a>
+							<a href="{{ URL::route('poster-detail',$poster->id) }}">More</a>
 						  </div>
 						</div>
 						<div class="cb"></div>

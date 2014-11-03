@@ -39,7 +39,10 @@ Route::group(array('before' => 'guest'), function() {
 		 Route::post('/search/result', array(
 			'as' => 'search',
 			'uses' => 'SearchController@getSearch'
-		 ));		 
+		 ));
+		 
+		 Route::post('poster/detail/{id}',array('as'=>'poster-detail','uses'=>'posterController@postDetail'));
+		 		 
 		
 	 });
 	/*
@@ -68,5 +71,6 @@ Route::group(array('before' => 'guest'), function() {
 	 Route::get('/search/', array(
 		'as' => 'search',
 		'uses' => 'SearchController@getSearch'
-	 ));	 		
+	 ));
+	Route::get('poster/detail/{id}',array('as'=>'poster-detail','uses'=>'posterController@getDetail'));	 	 		
 });
