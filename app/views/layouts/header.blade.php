@@ -1,6 +1,6 @@
 ﻿<?php
-$url = 'http://api.hostip.info/?ip='.$_SERVER['REMOTE_ADDR'];
-echo $url;
+//$url = 'http://api.hostip.info/?ip='.$_SERVER['REMOTE_ADDR'];
+//echo $url;
 ?>
 <div class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
@@ -13,8 +13,8 @@ echo $url;
       </button>
       <a class="navbar-brand" href="{{ URL::to('/'); }}">
         <img src="{{ URL::to('/'); }}/img/logo.png">
-        <span><strong>eshtihar</strong><!--.com--></span>
-        <p>Pakistan's first growing online classified</p>
+        <!--<span><strong>eshtihar</strong>.com</span>
+        <p>Pakistan's first growing online classified</p>-->
       </a>
     </div>
     <div class="header-cocialbox">
@@ -30,23 +30,33 @@ echo $url;
         <li><a href="#">Find Projects</a></li>
         <li><a href="#about">Karma Shop</a></li>
       </ul>-->
-      <ul class="nav navbar-nav navbar-right nav-right">
-        <li><a href="login-registration.html"  style="text-transform: none">Log in</a></li>
-        <li><a href="login-registration.html"  style="text-transform: none">Sign up</a></li>
-        <li><a href="{{ URL::route('createad') }}" class="header-post-button">Post a ad</a></li>
-        <!-- <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-transform: capitalize">Sign up <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li> -->
-      </ul>
+      
+		<ul class="nav navbar-nav navbar-right nav-right loggedin">
+            @if(Auth::check())
+            <li class="h-notifications">
+              <ul>
+                <li><a class="h-msgsg" href="#"></a><span>2</span></li>
+              </ul>
+            </li>
+            <li class="user-name-drowpd dropdown">
+               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+               	{{ Auth::user()->fname.' '.Auth::user()->lname }} 
+               </a>
+               <ul role="menu" class="dropdown-menu">
+                <li><a href="#">My Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Manage my ads</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ URL::route('logout') }}">Logout</a></li>
+              </ul> 
+            </li>
+            <li><a href="{{ URL::route('createad') }}" class="header-post-button">+ Submit an ad</a></li>
+			@else
+            <li><a href="{{ URL::route('login') }}"  style="text-transform: none" class="myaccount">Login</a></li>
+            <li><a href="{{ URL::route('createad') }}" class="header-post-button">+ Submit an ad</a></li>
+           @endif            
+          </ul>      
+
     </div><!--/.nav-collapse -->
   </div>
 </div>

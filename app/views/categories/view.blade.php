@@ -9,7 +9,7 @@ $selCat = Category::find($catid);
 //print_r($selCat);
 //die;
 ?>
-<div class="container">
+<div class="container list-poster">
       <div class="row">
         <div>
           <div class="row listBox">
@@ -57,15 +57,16 @@ $selCat = Category::find($catid);
 						if($field->field_type=='list'){
 							 $arr = json_decode($field->field_value); 
 						?>    
-                            <h2 class="content-heading">Model</h2>
+                            <h2 class="content-heading"><?php echo $field->field_label?></h2>
                             <ul class="ac-settings">
                               <li>
                                 <div class="form-section-right">
                                   <select name="option<?php echo $field->id;?>">
+									<option value="">Please Select</option>
                                     <?php
-									foreach($arr as $opt){ 
-									?>
-									<option value="<?php echo $opt;?>"><?php echo $opt;?></option>
+									foreach($arr as $opt){ 									?>
+
+                                    <option value="<?php echo $opt;?>"><?php echo $opt;?></option>
 									<?php 
 									}
 									?>

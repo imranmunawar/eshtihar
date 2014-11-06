@@ -1,10 +1,13 @@
 ﻿<?php
-$cities = City::where('state_id','=', 2)->get();
+$cityid = GeneralPurpose::getCity();
+//$cityid = 1;
+//$cities = City::where('state_id','=', 1)->get();
+$cities = City::where('state_id','=', $cityid[0]->state_id)->get();
 $categories = Category::where('parent_id','=', 0)->get();
 $action = Route::currentRouteAction();
 if($action != 'posterController@getDetail'){
 ?>
-<div class="container-fluid searchArea">
+<div class="container-fluid searchArea top-search">
   <div class="container">
     <div class="row">
      {{ Form::open(array('url' => 'search/result','files'=>true,'id'=>'leftSearch')) }}
@@ -15,7 +18,7 @@ if($action != 'posterController@getDetail'){
 				<?php 
 				foreach($cities as $city){
 					$selected = '';
-					if(isset($location) && $city->id == $location){$selected = 'selected';}					
+					if((isset($location) && $city->id == $location) || (!isset($location) && $cityid[0]->id==$city->id)){$selected = 'selected';}					
 				?>
             	<option value="<?php echo $city->id;?>" <?php echo $selected;?>><?php echo $city->city_name;?></option>
                 <?php

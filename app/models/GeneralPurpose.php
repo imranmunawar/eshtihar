@@ -66,7 +66,14 @@ class GeneralPurpose {
             }
         }
     }	
-	
+	public static function getCity(){
+		$ip = '182.189.82.18';
+		$country=file_get_contents('http://api.hostip.info/get_html.php?ip='.$ip.'');
+		$arr = explode('City: ',$country);;
+		$arr = explode('IP: ',$arr[1]);	
+		$city = City::where('city_name', 'LIKE', '%'.trim($arr[0]).'%')->get(array('id', 'city_name', 'state_id'));
+		return $city;
+	}
 	/**
      * Get Cities of a Country
      * 

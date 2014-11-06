@@ -414,4 +414,28 @@ $().ready(function() {
 		}
 	}); 
 });
+$().ready(function() {
+	
+	$("#postLogin").validate({
+
+	rules: {
+
+		password: {
+			required: true,
+		},
+		
+		email: {
+			required: true,
+			email: true
+		},
+		
+	},
+	messages: {
+		password: {
+			required: "Please provide password",
+		},			
+		email: "Enter a valid email address",
+		}
+	}); 
+});
 

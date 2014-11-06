@@ -17,18 +17,28 @@ class PosterController extends BaseController {
 
 	public function getCreatead()
 	{
-		$view = View::make('poster.createad')->with('title' , 'Post a free ad');
-		$mainCats = Category::where('parent_id','0')->orderby('order','asc')->get();
-		//echo $country;
-		
-		$states = array('' => 'Select State') + State::lists('state_name', 'id');
-		$cities = array('' => 'Select City');
-
-		$view->mainCategories = $mainCats;
-		$view->states = $states;
-		$view->cities = $cities;
-		
-		return $view;
+		if(Auth::check()){
+			$view = View::make('poster.createad')->with('title' , 'Post a free ad');
+			$mainCats = Category::where('parent_id','0')->orderby('order','asc')->get();
+			//echo $country;
+			$cityid = GeneralPurpose::getCity();
+			$states = array('' => 'Select State') + State::lists('state_name', 'id');
+			$cities = array('' => 'Select City') + City::where('state_id','=',$cityid[0]->state_id)->lists('city_name','id');
+	
+			$view->mainCategories = $mainCats;
+			$view->states = $states;
+			$view->cities = $cities;
+			$view->stateid = $cityid[0]->state_id;
+			$view->cityid = $cityid[0]->id;
+			$view->email = Auth::user()->email;
+			$view->name = Auth::user()->fname.' '.Auth::user()->lname;
+			
+			return $view;
+		}else{
+			return Redirect::route('login');
+			//$view = View::make('poster.login')->with('title' , 'Post a free ad');
+			//return $view;			
+		}
 	}
 	public function postCreatead(){
 		
@@ -74,10 +84,22 @@ class PosterController extends BaseController {
 			$state  = Input::get('states');
 			$city   = Input::get('cities');			
 			$utype  = Input::get('user_type');
-
+			
+			if(Input::get('feature')==1){
+				$feature = Input::get('feature');
+			}else{
+				$feature = 0;				
+			}
+			if(Input::get('spotlight')==1){
+				$splight = Input::get('spotlight');
+			}else{
+				$splight = 0;				
+			}	
+			$userid = Auth::user()->id;
 			$postArray = array(
 				'category_id' => $category,
 				'title' => $title,
+				'user_id' => $userid,
 				'detail' => $detail,
 				'price' => $price,
 				'adtype' => $adtype,
@@ -87,6 +109,8 @@ class PosterController extends BaseController {
 				'seller_email' => $uemail,
 				'seller_phone' => $uphone,
 				'seller_type' => $utype,
+				'featured' => $feature,
+				'spotlight' => $splight,				
 				'created_at' => time(),
 				'updated_at' => time()																												
 			);			
@@ -146,9 +170,15 @@ class PosterController extends BaseController {
 
                     }
                 }
-            }				
-																							
-			return Redirect::route('createad')->with('global', 'Eshtihar successfully added');			
+            }
+			$data = array('title' => $poster->title, 'name' => $poster->seller_name);				
+			Mail::send('emails.poster.postad', $data, 
+						function($message) use ($poster) {
+							$message->to($poster->seller_email, $poster->seller_name)->subject('Your Ad has been sent to Verification: "'.$poster->title.'"');
+						}
+					   );
+			$pid = base64_encode($poster->id);																				
+			return Redirect::route('confirm',$pid);			
 		}
 	}
 	public function getAttributes($id)
@@ -197,5 +227,13 @@ class PosterController extends BaseController {
 			
 			}
 		}
-	}		
+	}
+	public function getConfirm($id)
+	{
+		$pid = base64_decode($id);
+		$poster  = Poster::where('id', '=', $pid)->get(array('id', 'title', 'seller_name','seller_email', 'user_id'));
+		$view = View::make('poster.confirm')->with('title' , 'Post a free ad');
+		$view->poster = $poster;
+		return $view;
+	}			
 }

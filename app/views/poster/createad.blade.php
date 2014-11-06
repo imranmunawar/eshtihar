@@ -1,7 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
+<?php
 
+?>
 <div class="container">
  		@if($errors->has())
         <div class="alert alert-danger" role="alert">{{ $errors->first() }}</div>
@@ -146,14 +148,14 @@
                     
                     <div class="form-section-right selectinside location">
 						{{-- Form::select('states', $states, '') --}}
-						{{ Form::select('states', $states, isset($states['id']) ? $states['id']: '',array('id'=>'ad_state')) }}                            
+						{{ Form::select('states', $states, isset($states['id']) ? $states['id']: $stateid,array('id'=>'ad_state')) }}                            
                     </div>
                   </div>
 				  <div class="form-section" id="load-cities">
                     <label class="control-label form-section-left">City <span class="impred">*</span></label>
                     
                     <div class="form-section-right selectinside location">
-							{{ Form::select('cities', $cities,'',array('id' => 'city')) }}
+							{{ Form::select('cities', $cities,$cityid,array('id' => 'city')) }}
                     </div>
                   </div>                  
                </div> 
@@ -167,7 +169,7 @@
                   <div class="form-section">
                     <label class="control-label form-section-left">Name<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_uname','',array('id' => 'ad_uname')) }}
+                      {{ Form::text('ad_uname',$name,array('id' => 'ad_uname')) }}
                     </div>
                     <div class="form-section-third">
                     </div>
@@ -175,7 +177,7 @@
 				  <div class="form-section">
                     <label class="control-label form-section-left">Email<span class="impred">*</span></label>
                     <div class="form-section-right">
-                      {{ Form::text('ad_uemail','',array('id' => 'ad_uemail')) }}
+                      {{ Form::text('ad_uemail',$email,array('id' => 'ad_uemail')) }}
                     </div>
                     <div class="form-section-third">
                     </div>
@@ -204,14 +206,46 @@
                       </div>
                     </div>
                   </div>                                                    
+              </div>
+              
+			  <div class="signup-form featuredad">
+                <h2 class="content-heading">Make your ad stand out! Select an option below to promote your ad</h2>                 
+				  <div class="form-section h26">
+                    <label class="control-label form-section-left featured">FEATURED</label>
+                    <div class="form-section-right">
+                      <div class="checkbox">
+                        <label>
+                          {{ Form::checkbox('feature','1', false, array('class'=>'realchkbx')) }}
+                          <div class="visvchkbx"></div> 
+                          <div class="chkbxtitle">Up to 7 times more views and replies*. Your ad will appear at the top of the listings for 3, 7 or 14 days.</div>
+                        </label>
+                      </div>
+                    </div>
+                  </div> 
+				  <div class="form-section h26">
+                    <label class="control-label form-section-left spotlight">SPOTLIGHT</label>
+                    <div class="form-section-right">
+                      <div class="checkbox">
+                        <label>
+                          {{ Form::checkbox('spotlight','1', false, array('class'=>'realchkbx')) }}
+                          <div class="visvchkbx"></div> 
+                          <div class="chkbxtitle">Your ad will appear on the eshtihar.com homepage and will be seen by millions of people.</div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>                                                                     
 
+
+              </div>
                   <div class="form-section">
-                    <div class="btns-left leftmrl">
+                    <div class="btns-left leftmr">
                        {{Form::submit('Publish', ['class' => 'signin-btn'])}}
                        {{Form::button('Cancel', ['class' => 'btn-gray'])}}
                      </div>
-                  </div>
-              </div>
+                  </div>                            
+              
+              
+              
             </div>
 
             {{ Form::hidden('num-image','',array('id'=>'num-image')) }}                                

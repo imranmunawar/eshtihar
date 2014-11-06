@@ -8,7 +8,7 @@ $categories = Category::where('parent_id','=', 0)->get();
 //print_r($posters[0]->title);
 //die;
 ?>
-<div class="container">
+<div class="container list-poster">
       <div class="row">
         <div>
           <div class="row listBox">
@@ -62,6 +62,7 @@ $categories = Category::where('parent_id','=', 0)->get();
                               <li>
                                 <div class="form-section-right">
                                   <select name="option<?php echo $field->id;?>">
+                                  <option value="">Please Select</option>
                                     <?php
 									foreach($arr as $opt){ 
 									?>
@@ -139,7 +140,8 @@ $categories = Category::where('parent_id','=', 0)->get();
 							$resources = MediaResource::where('poster_id','=', $poster->id)->take(1)->get();
 							//$category = Category::where('id','=', $catid)->take(1)->get();
 							$city = City::where('id','=', $poster->city_id)->take(1)->get();
-							//print_r($resources[0]->upload);
+							$cats = explode(',',$poster->category_id);
+							$category = Category::where('id','=', $cats[1])->get();
 							$cls = '';
 							//if($poster->featured == 1){$cls = 'featured';}
 						?>
@@ -154,7 +156,7 @@ $categories = Category::where('parent_id','=', 0)->get();
 							</a>
 							</h2>
 							<div class="status-bar">
-							<p><span><?php echo $city[0]->city_name;?> | car</span></p>
+							<p><span><?php echo $city[0]->city_name;?> | <?php echo $category[0]->category;?></span></p>
 							</div>                        
 							<p><?php if(strlen($poster->detail) <= 80){echo $poster->detail;}else{echo substr($poster->detail,0,80).'...';}?></p>
 							<p><strong><?php echo GeneralPurpose::timeAgo($poster->created_at);?></strong></p>
@@ -175,7 +177,7 @@ $categories = Category::where('parent_id','=', 0)->get();
 					?>                                                                                                                                          
               </div>
             </div>
-
+			<?php //echo $posters->links(); ?>
 
           </div>
         </div>

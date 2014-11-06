@@ -19,6 +19,7 @@ class HomeController extends BaseController {
 	{
 		$view = View::make('home.index')->with('title' , 'Home');
 		$mainCats = Category::where('parent_id','0')->orderby('order','asc')->get();
+		$posters = Poster::where('spotlight','1')->orderby('id','desc')->get();		
 		//print_r($mainCats);
 		//exit;
 		$catArr = array();
@@ -32,6 +33,7 @@ class HomeController extends BaseController {
 		}
 		//print_r($catArr);
 		$view->categories = $catArr;
+		$view->posters = $posters;
 		return $view;
 	}
 }

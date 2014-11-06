@@ -44,7 +44,7 @@
     
     <script type="text/javascript">
 	
-jQuery(document).ready(function ($) {
+		jQuery(document).ready(function ($) {
             var options = {
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
                 $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
@@ -103,7 +103,7 @@ jQuery(document).ready(function ($) {
 	
     $(document).ready( function() {
     $('#myCarousel').carousel({
-      interval:   1000
+      interval:   500
   });
   
   var clickEvent = false;

@@ -5,7 +5,7 @@
 //print_r($categories[1]->name);
 //exit;
 ?>
-<div class="container">
+<div class="container spotlight">
   <div class="row">
     <div class="col-md-12 testimonial">
       <h2 class="content-heading">Spotlight ads</h2>
@@ -13,22 +13,42 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner testi-slider">
-          <div class="item active">
-            <div class="testi-content">
-              <img src="img/manager-01.png" width="200" height="100">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">
-              <img src="img/manager-01.png">                
-            </div>
-          </div>
-
+		  <?php
+		  $p = 0; 
+		  $c = count($posters);
+		  $t = 0;
+		  foreach($posters as $poster)
+		  {
+			  $p++;
+			  $t++;
+			  $cls = '';
+			  if($t==1){$cls = 'active';}
+			  if($p==1){
+				echo '<div class="item '.$cls.'"><div class="testi-content">';  
+			  }
+			  $resources = MediaResource::where('poster_id','=', $poster->id)->take(1)->get();
+		  ?>        
+          	  <div class="sliddetail">
+              	<img src="{{ URL::to('/'); }}/uploads/poster/<?php echo $resources[0]->upload;?>" />
+              	<h2><a href="{{ URL::route('poster-detail',$poster->id) }}">
+					<?php  
+					if(strlen($poster->title) > 15)
+					{
+						echo substr($poster->title,0,15).'..';
+					}else{
+						echo $poster->title;
+					} ?>
+                    </a></h2>
+                <div class="price"><strong>{{ $poster->price }}</strong></div>
+              </div>
+          <?php
+			  if($p==6 || $c==$t){
+				echo '</div></div>';
+				$p=0;  
+			  }
+		  }
+		  ?>
         </div>
-       
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
           <span class="testi-control-left"></span>

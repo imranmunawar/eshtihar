@@ -6,19 +6,19 @@
 }
 .searchArea ul li input[type="text"] {min-width:0px;}
 .searchArea ul li select {
-    background: none repeat scroll 0 0 transparent;
+	background: none repeat scroll 0 0 transparent;
     border: 1px solid #999999;
     box-shadow: none;
-    color: #ffffff;
-    font-size: 20px;
-    width: 225px!important;
-    padding: 9px;
-	height:48px;
+    color: #000;
+    font-size: 12px;
+    height: 32px;
+    padding: 6px;
+    width: 225px !important;
 	
 }
 .testimonial h2.content-heading{ margin-top:5px;}
 .item .testi-content img { margin-right:15px;}
-.testi-slider .item { height:120px;}
+.testi-slider .item { height:130px;}
 #home-cats .col-md-6 {
     width: 33%;
 }
@@ -36,8 +36,9 @@
 #home-cats .author-detail a { font-weight:normal;}
 .full-form { width:100%;}
 .full-form  .signup-form {
-    margin-top: 20px;
 	margin-bottom: 20px;
+    margin-top: 0;
+    padding: 20px 30px 30px;
 }
 .full-form .form-section .form-section-right { width:420px;}
 .full-form .form-section .location { width:262px;}
@@ -51,7 +52,7 @@
     margin-left: 0% !important;
 }
 .listBox .col-md-7 {
-    width: 74.333%;
+    width: 60.333%;
 }
 .listBox .col-md-3 input[type="text"], .listBox .col-md-3 select {
     border: 1px solid #d8dee1;
@@ -77,14 +78,14 @@
 }
 .listBox .col-md-7 .col-md-4 {
     width: 100%;
-	border:1px solid #eef1f2;
-	background-color:#eef1f2;
+	border:1px solid #f1fdc6;
+	background-color:#f1fdc6;
 	padding:10px;
 }
 .listBox .col-md-7 .col-md-4 .box-2-disc {
     color: #666666;
     float: right;
-    width: 77%;
+    width: 74%;
 }
 .listBox .col-md-7 .col-md-4 img {
  	height: 110px;
@@ -108,7 +109,7 @@
     visibility: hidden;
 }
 a.navbar-brand img {
-    width: 50px;
+    width: 150px;
 }
 .navbar-brand { float:none;}
 a.navbar-brand span strong{ color:#2c3e50; font-size:25px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;}
@@ -125,14 +126,14 @@ margin-top: 20px;
 margin-top: 20px;
 }
 .navbar-default .navbar-nav > li > a.header-post-button {
-    background-color: #ff0080;
+    background-color: #ff9000;
     border-radius: 3px;
     color: #fff;
     height: 36px;
  	padding: 9px 5px 5px;
     text-align: center;
-    text-transform: capitalize;
-    width: 120px;
+	text-transform: none;
+    width: 158px;
 }
 .navbar .navbar-collapse {
     margin-right: 15px;
@@ -142,7 +143,7 @@ margin-top: 20px;
     padding: 6px 6px 0 0;
 }
 .navbar-default .navbar-nav > li > a.header-post-button:hover {
-	background-color:#18bc9c;
+	background-color:#a8cd28;
 }
 .location-box{ min-height: 280px;}
 .full-form .form-section .upload-img{ width:1000px; border-right:none;}
@@ -190,20 +191,29 @@ h2.shop-box-title {
 .error,
 .cerror{ color:#F00; font-size:12px;}
 .searchArea {
-    background-color: #00cc99;
+    background-color: #a8cd28;
+	background-image: linear-gradient(to bottom, #95c858, #7bb74c, #6bae48);
+    background-repeat: repeat-x;	
+border-radius: 2px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);	
 }
 .searchArea ul li input[type="submit"] {
     background: none repeat scroll 0 0 #2386c8;
 }
 .searchArea ul li input[type="submit"]:hover {
-    background: none repeat scroll 0 0 #ff0080;
-	border: 1px solid #ff0080;
+    background: none repeat scroll 0 0 #ff9000;
+	border: 1px solid #ff9000;
 }
 .searchArea ul li select {
-    border: 1px solid #18bc9c;
+    border: 1px solid #fff;
+	background-color: #defb79;
+	font-weight:bold;
 }
 .searchArea ul li input[type="text"] {
-     border: 1px solid #18bc9c;
+     border: 1px solid #fff;
+	 background-color: #defb79;
+	 color:#000; 
+	font-weight:bold;	 
 }
 .searchArea ul {
     padding: 5px;
@@ -225,13 +235,13 @@ h2.shop-box-title {
 	width:45%;
 }
 .searchArea ul li input[type="submit"] {
-    border: 1px solid #2386c8;
+	border: 1px solid #2386c8;
     color: #ecf0f1;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
-    padding: 6px 14px;
+    padding: 6px;
     text-shadow: none;
-    width: 172px;
+    width: 135px;
 }
 .profile-popover {
     padding: 0;
@@ -317,6 +327,156 @@ h2.box-2-title{ font-size:18px;}
 	padding:5px;
 	border: 1px solid #d8dee1;
 }
-
-
+.searchArea ul li input[type="text"] {
+    font-size: 12px;
+    min-width: 225px;
+    padding: 6px;
+}
+.spotlight{ position:relative; top:-35px;}
+.navbar-default {
+    background-color: #fff;
+}
+.myaccount{margin-top: 7px;}
+.login-form {
+    background: none repeat scroll 0 0 #defb79;
+}
+.list-poster{ position:relative; top:-15px;}
+.signin-btn {
+    background: none repeat scroll 0 0 #2386c8;
+    border: 1px solid #2386c8;
+}
+.signin-btn:hover {
+    background: none repeat scroll 0 0 #ff9000;
+    border: 1px solid #ff9000;
+}
+.col-md-7{ padding-left:0px;}
+h2.shop-box-title {
+	border-bottom:3px solid #a8cd28;
+}
+.item .testi-content img {
+    border: 3px solid #a8cd28;
+}
+.signup-form {
+    background: none repeat scroll 0 0 #f1fdc6;
+}
+.loginForm{ margin-top:30px;}
+.loggedin {
+    margin-top: 0;
+}
+.navbar .navbar-collapse .dropdown ul.dropdown-menu li a:hover{ background-color:#defb79; color:#000;}
+.box-type-3 img {
+    float: left;
+    height: 35px;
+    width: 30px;
+}
+ul.nav-right li.h-notifications,
+ul.nav-right li.user-name-drowpd {
+background-image: linear-gradient(to bottom, #fff, #fff, #fff);
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav .myaccount:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #fff;
+	color:#ff9000;
+}
+.navbar-default .navbar-nav .dropdown a:hover{	color:#ff9000;}
+.featuredad .form-section .form-section-right {
+    width: 700px;
+}
+.featuredad .featured{
+    background-color: #fff4f1;
+    height: 28px;
+    margin-right: 10px;
+    margin-top: 9px;
+    padding-top: 4px;
+    text-align: center;
+    width: 124px;
+	color:#444241;	
+	border:#CCC solid 1px;
+	}
+.featuredad .spotlight{
+    background-color: #2386c8;
+    height: 28px;
+    margin-right: 10px;
+    margin-top: 43px;
+    padding-top: 4px;
+    text-align: center;
+    width: 124px;
+	color:#fff;		
+	}	
+.project-mission-scor .project-mission-points {
+    background: none repeat scroll 0 0 #85be52;
+    padding: 10px;
+}	
+.project-mission-scor .project-mission-points .points p { font-size:20px; font-weight:bold;}
+.project-mission-scor .project-mission-text p {
+    text-align: left;
+}
+#confirm{ margin-top:10px; text-align:center;}
+#confirm .viewad{ background-color:#a8cd28; width:150px; border:#a8cd28 solid 1px; padding: 10px 48px;}
+#confirm .viewad:hover{color:#ff9000; text-decoration:none;}
+#confirm .submitad{ background-color:#ff9000; width:165px; border:#ff9000 solid 1px; padding: 10px 20px;}
+#confirm .submitad:hover{color:#a8cd28; text-decoration:none;}
+#confirmation{ min-height:500px;}
+#confirmation .project-mission-scor{ margin-bottom:30px;}
+.item .testi-content img {
+	height: 125px;
+    width: 143px;
+}
+.sliddetail{ float:left;}
+.sliddetail h2{ font-size:14px; width:130px; font-weight:bold; margin-bottom: 0;}
+.dashboard{ position:relative; top: -42px;}
+.dashboard .user-popularity { height:174px;}
+.dashboard .user-credentials {
+    padding: 17px 0;
+}
+.dashboard .user-credentials .prof-user img {
+    height: 130px;
+    width: 130px;
+}
+.dashboard-myads{ width:1170px;}
+.dashboard-myads .col-md-4 {
+    width: 100%;
+	margin-bottom: 5px;
+	padding:5px;
+	background-color: #f1fdc6;
+    border: 1px solid #f1fdc6;
+}
+.user-tabs-full {
+    background-color: #fff;
+}
+.dashboard-myads h2.content-heading {
+    margin-top: 0px;
+}
+ul.user-tabs li.active a {
+    background: none repeat scroll 0 0 #6bae48;
+    color: #ffffff;
+}
+.dashboard-myads .box-type-2 img{ float:left;}
+.dashboard-myads .box-type-2 .box-2-disc{float: left;
+    padding-left: 12px;} 
+.dashboard-myads .box-type-2 img {
+    width: 188px;
+}	
+.dashboard-myads .box-2-disc a {
+     text-transform: capitalize;
+}
+.dashboard-myads .box-2-disc a:hover {
+    color: #6bae48;  
+}
+.dashboard-tabs{
+    top: -44px;
+}
+.dashboard-myads .signup-form { margin-top:0px;}
+.dashboard-myads .col-md-7{ width:100%;}
+.dashboard-myads .form-section .form-section-right {
+    width: 944px;
+}
+.dashboard-myads .btns-left.deactive {
+    margin-left: 135px;
+    text-align: center;
+}
+.dashboard-myads .btns-left.deactive .redbtn{ background-color:#ff9000;    border: 1px solid #ff9000;}
+.dashboard-myads .btns-left.deactive .redbtn:hover{ background-color:#2386c8;    border: 1px solid #2386c8;}
 /*2386c8*/
